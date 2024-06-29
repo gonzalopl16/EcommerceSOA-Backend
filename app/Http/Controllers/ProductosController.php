@@ -33,12 +33,14 @@ class ProductosController extends Controller
         Validator::make($request->all(),[
             'nombre' => 'required',
             'descripcion' => 'required',
+            'image_path' => 'required',
             'precio' => 'required',
             'stock' => 'required'
         ]);
         $producto = Producto::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
+            'image_path' => $request->image_path,
             'precio' => $request->precio,
             'stock' => $request->stock
         ]);
