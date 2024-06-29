@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ID_Orden')->constrained('orders'); // Clave foránea a la tabla orders
-            $table->decimal('monto', 10, 2); // Monto
-            $table->date('fecha'); // Fecha
-            $table->string('metodo'); // Método de pago
+            $table->foreignId('ID_Orden')->constrained('orders');
+            $table->decimal('monto', 10, 2);
+            $table->date('fecha');
+            $table->string('metodo');
             $table->timestamps();
         });
     }

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('facturas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ID_Orden')->constrained('orders'); // Clave foránea a la tabla orders
-            $table->date('fecha'); // Fecha
-            $table->decimal('monto_total', 10, 2); // Monto total
+            $table->foreignId('ID_Orden')->constrained('orders');
+            $table->date('fecha');
+            $table->decimal('monto_total', 10, 2);
             $table->timestamps();
         });
     }

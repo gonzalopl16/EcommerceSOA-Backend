@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('ID_Cliente')->constrained('clientes'); // Clave foránea a la tabla clientes
-            $table->date('fecha'); // Fecha
-            $table->string('estado'); // Estado
+            $table->foreignId('ID_Cliente')->constrained('clientes');
+            $table->date('fecha');
+            $table->string('estado');
             $table->timestamps();
         });
     }
