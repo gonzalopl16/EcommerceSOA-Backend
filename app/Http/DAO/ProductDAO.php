@@ -6,6 +6,7 @@ use App\Http\interfaces\IProduct;
 use App\Models\Producto;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Ramsey\Uuid\Type\Integer;
 
 class ProductDAO implements IProduct {
     public function index() {
@@ -43,6 +44,16 @@ class ProductDAO implements IProduct {
     public function destroy(string $id) {
         $producto = Producto::findOrFail($id);
         $producto->delete();
+    }
+
+    public function decreseStock(String $id, Integer $cantidad){
+        $producto = Producto::findOrFail($id);
+        if ($producto->stock < $cantidad) {
+            throw new \Exception("Stock insuficiente");
+        }
+        $producto->stock -= $cantidad;
+        $producto->save();
+
     }
 
     private function validateProducto(Object $object)

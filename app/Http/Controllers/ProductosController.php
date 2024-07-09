@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use App\Http\DAO\ProductDAO;
+use Illuminate\Validation\ValidationException;
 
 class ProductosController extends Controller
 {
@@ -27,7 +26,6 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        return 'Not Found';
     }
 
     /**
@@ -35,22 +33,8 @@ class ProductosController extends Controller
      */
     public function store(Request $request)
     {
-        Validator::make($request->all(),[
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'image_path' => 'required',
-            'precio' => 'required',
-            'stock' => 'required'
-        ]);
-        $producto = Producto::create([
-            'nombre' => $request->nombre,
-            'descripcion' => $request->descripcion,
-            'image_path' => $request->image_path,
-            'precio' => $request->precio,
-            'stock' => $request->stock
-        ]);
-
-        return response()->json($producto);
+        $producto = $this->productDAO->store((object) $request->all());
+        return response()->json($producto, 201);
     }
 
     /**
@@ -58,8 +42,7 @@ class ProductosController extends Controller
      */
     public function show(string $id)
     {
-        $producto = Producto::find($id);
-        return response()->json($producto);
+        return response()->json($this->productDAO->show($id));
     }
 
     /**
@@ -74,13 +57,7 @@ class ProductosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $producto = Producto::find($id);
-        Validator::make($request->all(),[
-            'nombre' => 'required',
-            'descripcion' => 'required',
-            'precio' => 'required',
-            'stock' => 'required'
-        ]);
+        $producto = $this->productDAO->update((object) $request->all(), $id);
         $producto->update($request->all());
         return response()->json($producto);
     }
@@ -90,11 +67,10 @@ class ProductosController extends Controller
      */
     public function destroy(string $id)
     {        
-        $producto = Producto::find($id);
-        $producto->delete();
+        $this->productDAO->destroy($id);
         $data = [
             'message' => 'Producto Eliminado',
         ];
-        return response()->json($data);
+        return response()->json($data, 204);
     }
 }

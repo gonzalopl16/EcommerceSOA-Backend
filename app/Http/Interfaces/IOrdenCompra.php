@@ -2,3 +2,6 @@
 
 namespace App\Http\interfaces;
 
+interface IOrdenCompra{
+    
+}
