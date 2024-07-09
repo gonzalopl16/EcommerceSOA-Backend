@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use App\Http\DAO\ProductDAO;
 
 class ProductosController extends Controller
 {
+    protected $productDAO;
+
+    public function __construct(ProductDAO $productDAO){
+        $this->productDAO = $productDAO;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $productos = Producto::all();
-        return response()->json($productos);
+        return response()->json($this->productDAO->index());
     }
 
     /**
@@ -22,7 +27,7 @@ class ProductosController extends Controller
      */
     public function create()
     {
-        
+        return 'Not Found';
     }
 
     /**
