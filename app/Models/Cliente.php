@@ -26,4 +26,9 @@ class Cliente extends Model
     {
         return $this->hasMany(Payment::class, 'ID_Cliente');
     }
+
+    public function reclamaciones()
+    {
+        return $this->hasMany(Reclamacion::class, 'id_cliente');
+    }
 }
