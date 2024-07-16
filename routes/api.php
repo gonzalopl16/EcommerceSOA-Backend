@@ -12,4 +12,6 @@ Route::resource('reclamos', ReclamacionController::class);
 
 Route::post('/login', [ClienteController::class, 'login']);
 
+Route::get('/cliente', [ClienteController::class,'index']);
+
 Route::post('/register', [ClienteController::class, 'register']);

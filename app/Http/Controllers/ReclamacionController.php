@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\DAO\ReclamacionDAO;
+use App\Http\DAO\ReclamacionDAO;
 use App\Models\Reclamacion;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ReclamacionController extends Controller
 {
@@ -24,26 +25,13 @@ class ReclamacionController extends Controller
 
     public function store(Request $request)
     {
-        $reclamacion = new Reclamacion($request->all());
-
-        try {
-            $reclamacion = $this->reclamacionDAO->store($reclamacion);
-        } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
-        }
-
-        return response()->json($reclamacion, 201);
+        $reclamo = $this->reclamacionDAO->store((object) $request->all());
+        return response()->json($reclamo, 201);
     }
 
-    public function show($id)
+    public function show(string $id)
     {
-        try {
-            $reclamacion = $this->reclamacionDAO->show($id);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Reclamacion not found'], 404);
-        }
-
-        return response()->json($reclamacion);
+        return response()->json($this->reclamacionDAO->show($id));
     }
 
     public function update(Request $request, $id)

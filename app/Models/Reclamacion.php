@@ -9,6 +9,7 @@ class Reclamacion extends Model
 {
     use HasFactory;
 
+    protected $table = 'reclamaciones';
     protected $fillable = [
         'id_cliente',
         'DNI',

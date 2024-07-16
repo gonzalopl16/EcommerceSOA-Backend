@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class ClienteController extends Controller
 {
+
+    public function index(){
+        return Cliente::all();
+    }
+    
     public function login(Request $request)
     {
         $request->validate([

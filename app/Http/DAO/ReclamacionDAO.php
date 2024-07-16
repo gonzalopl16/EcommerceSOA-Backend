@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DAO;
+namespace App\Http\DAO;
 
 use App\Http\Interfaces\IReclamacion;
 use Illuminate\Support\Facades\Validator;
@@ -17,6 +17,7 @@ class ReclamacionDAO implements IReclamacion
     }
 
     public function destroy(string $id) {}
+    
     public function store(Object $object) {
         $this->validateReclamacion($object);
         return Reclamacion::create([
@@ -34,7 +35,7 @@ class ReclamacionDAO implements IReclamacion
     private function validateReclamacion(Object $object)
     {
         $validator = Validator::make((array) $object, [
-            'id_cliente' => 'required|exists:clientes,id',
+            'id_cliente' => 'required',
             'DNI' => 'required|string|max:255',
             'fecha' => 'required|date',
             'detalle_reclamo' => 'required|string',
