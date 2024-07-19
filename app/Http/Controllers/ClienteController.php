@@ -13,6 +13,16 @@ class ClienteController extends Controller
     public function index(){
         return Cliente::all();
     }
+
+    public function show($id) {
+        $cliente = Cliente::find($id);
+        
+        if ($cliente) {
+            return response()->json($cliente, 200);
+        }
+
+        return response()->json(['message' => 'Cliente no encontrado'], 404);
+    }
     
     public function login(Request $request)
     {

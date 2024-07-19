@@ -16,8 +16,11 @@ class ReclamacionDAO implements IReclamacion
     public function update(Object $object, string $id) {
     }
 
-    public function destroy(string $id) {}
-    
+    public function destroy(string $id) {
+        $reclamo = Reclamacion::findOrFail($id);
+        $reclamo->delete();
+    }
+
     public function store(Object $object) {
         $this->validateReclamacion($object);
         return Reclamacion::create([
@@ -36,9 +39,9 @@ class ReclamacionDAO implements IReclamacion
     {
         $validator = Validator::make((array) $object, [
             'id_cliente' => 'required',
-            'DNI' => 'required|string|max:255',
-            'fecha' => 'required|date',
-            'detalle_reclamo' => 'required|string',
+            'DNI' => 'required',
+            'fecha' => 'required',
+            'detalle_reclamo' => 'required',
         ]);
 
         if ($validator->fails()) {

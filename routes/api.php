@@ -14,4 +14,6 @@ Route::post('/login', [ClienteController::class, 'login']);
 
 Route::get('/cliente', [ClienteController::class,'index']);
 
+Route::get('/clientes/{id}', [ClienteController::class, 'show']);
+
 Route::post('/register', [ClienteController::class, 'register']);

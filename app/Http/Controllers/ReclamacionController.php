@@ -40,5 +40,10 @@ class ReclamacionController extends Controller
 
     public function destroy($id)
     {
+        $this->reclamacionDAO->destroy($id);
+        $data = [
+            'message' => 'Producto Eliminado',
+        ];
+        return response()->json($data, 204);
     }
 }
