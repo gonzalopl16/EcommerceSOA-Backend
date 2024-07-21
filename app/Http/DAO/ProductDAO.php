@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Ramsey\Uuid\Type\Integer;
 
-class ProductDAO implements IProduct {
+class ProductDAO{
     public function index() {
         return Producto::all();
     }
