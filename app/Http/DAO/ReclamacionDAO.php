@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\Reclamacion;
 
-class ReclamacionDAO implements IReclamacion
+class ReclamacionDAO
 {
     public function index() {
         return Reclamacion::all();
